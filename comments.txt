@@ -1,0 +1,1 @@
+Нажать F1 - прописать task: run task > npm: install - установятся модули из package.json
