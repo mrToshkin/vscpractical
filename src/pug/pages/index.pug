@@ -1,0 +1,20 @@
+extends layout/main
+
+block variables
+	- var pageTitle = 'It\'s pug practice main page'
+	- var forh1 = 'Yo makaki!!!'
+	- var pBulling = true
+
+block head
+	meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+	link(rel="stylesheet", href="style.css")
+
+block content
+	h1= forh1
+	p.content.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+		Magni nostrum maxime eos, perferendis et sequi voluptatibus repellat, odio aut inventore eveniet laborum suscipit voluptates dicta dolorum eaque neque? Repellendus, odit.
+	if pBulling
+		p now its true
+	else
+		p now its false

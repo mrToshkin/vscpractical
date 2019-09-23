@@ -1,1 +1,5 @@
-Нажать F1 - прописать task: run task > npm: install - установятся модули из package.json
+Установить модули package.json: Нажать F1 - прописать task: run task > npm: install
+Автоматически компилировать .pug в .html: ПКМ на gulpfile.js выбрать "open in terminal" и прописать pug -w src/pug/pages/index.pug
+Включить browser sync через экстеншены: Нажать F1, прописать browser sync: server mode in browser
+
+!--Почему-то style.css не подключается в .pug файл если он не находится в одной дикетории и ../ не помогает =\

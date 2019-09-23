@@ -1,0 +1,11 @@
+mixin navLink(link,name)
+	li
+		a(href=link).className=name
+
+header
+	nav
+		ul.header_list
+			+navLink('google.com','google')
+			+navLink('yandex.ru','yandex')
+			+navLink('bing.com','bing')
+			+navLink('instagram.com','instagram')

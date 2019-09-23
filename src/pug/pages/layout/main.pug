@@ -1,0 +1,11 @@
+block variables
+
+doctype html
+html(lang="en")
+	head
+		block head
+		title= pageTitle
+	body
+		include ../../modules/header
+		block content
+		include ../../modules/footer
