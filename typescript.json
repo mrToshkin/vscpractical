@@ -1,0 +1,118 @@
+{
+	// PascalCase - ${1/^(.)(.*)$/${1:/upcase}${2}/}
+	// camelCase - ${1/^(.)(.*)$/${1:/downcase}${2}/}
+	// Place your snippets for typescript here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	// ----- test utils ------
+	"beforeEach clearAllMocks": {
+		"prefix": "beclear",
+		"body": [
+			"beforeEach(() => {",
+			"  jest.clearAllMocks();",
+			"});",
+		],
+		"description": "jest beforeEach jest.clearAllMocks()",
+	},
+	"mock function": {
+		"prefix": "mockFunction",
+		"body": "const mock${1/^(.)(.*)$/${1:/upcase}${2}/} = jest.fn();",
+		"description": "mock function",
+	},
+	"mock function external": {
+		"prefix": "mockFunctionExternal",
+		"body": [
+			"import { $2 } from '$1';",
+			"jest.mock('$1', () => ({ $2: jest.fn() }));",
+		],
+		"description": "jest mock external function"
+	},
+	"mock service": {
+		"prefix": "mockService",
+		"body": [
+			"const mock${2/^(.)(.*)$/${1:/upcase}${2}/} = jest.fn();",
+			"jest.mock('store/apiClients/$1', () => ({",
+  		"  ${1/^(.)(.*)$/${1:/upcase}${2}/}Service: jest.fn().mockImplementation(() => ({",
+    	"    $2: mock${2/^(.)(.*)$/${1:/upcase}${2}/},",
+  		"  })),",
+			"}));",
+		],
+		"description": "jest mock service"
+	},
+
+	// ------ expects ------
+	"expect to be": {
+		"prefix": "expect.toBe",
+		"body": "expect($1).toBe($2);"
+	},
+	"expect to equal": {
+		"prefix": "expect.toEqual",
+		"body": "expect($1).toEqual($2);"
+	},
+	"expect to be called": {
+		"prefix": "expect.toBeCalled",
+		"body": "expect($1).toBeCalled();"
+	},
+	"expect to be called times": {
+		"prefix": "expect.toBeCalledTimes",
+		"body": "expect($1).toBeCalledTimes(${2:1});"
+	},
+	"expect not to be called": {
+		"prefix": "expect.not.toBeCalled",
+		"body": "expect($1).not.toBeCalled();"
+	},
+	"expect to be called with": {
+		"prefix": "expect.toBeCalledWith",
+		"body": "expect($1).toBeCalledWith($2);"
+	},
+
+	// ----- axios ------
+	"axios template test": {
+		"prefix": "axiosTestTemplate",
+		"body": [
+			"import axios from 'axios';",
+			"import { $1 } from '.';",
+			"",
+			"",
+			"describe('$1', () => {",
+			"  beforeEach(() => {",
+    	"    jest.clearAllMocks();",
+  		"  });",
+			"",
+			"  test('$1.$2() should call axios with correct params', () => {",
+			"    testAxiosHaveBeenCalledWith(",
+			"      axios.$3,",
+			"      () => new $1().$2(),",
+			"      ['$4'],",
+			"    );",
+			"  });",
+  		"});",
+			"",
+		],
+		"description": "jest axios template test"
+	},
+	"axios test": {
+		"prefix": "axiosTest",
+		"body": [
+			"test('$1.$2() should call axios with correct params', () => {",
+			"  testAxiosHaveBeenCalledWith(",
+			"    axios.$3,",
+			"    () => new $1().$2(),",
+			"    ['$4'],",
+			"  );",
+			"});",
+		],
+		"description": "jest axios test"
+	},
+}

@@ -1,0 +1,307 @@
+{
+	// PascalCase - ${1/^(.)(.*)$/${1:/upcase}${2}/}
+	// camelCase - ${1/^(.)(.*)$/${1:/downcase}${2}/}
+	// Place your snippets for typescriptreact here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"React component": {
+		"prefix": "react",
+		"body": [
+			"import React, { ReactElement } from 'react';",
+			"",
+			"",
+			"interface Props {",
+			"  $2",
+			"}",
+			"",
+			"export const $1 = ({ $2 }: Props): ReactElement => {",
+			"  $3",
+			"  return (",
+			"    <>",
+			"      ",
+			"    </>",
+			"  );",
+			"};",
+			"",
+		],
+		"description": "React tsx component"
+	},
+	"React component just return": {
+		"prefix": "reactReturn",
+		"body": [
+			"import React, { ReactElement } from 'react';",
+			"",
+			"",
+			"interface Props {",
+			"  $2",
+			"}",
+			"",
+			"export const $1 = ({ $2 }: Props): ReactElement => (",
+			"  <>",
+			"    ",
+			"  </>",
+			");",
+			"",
+		],
+		"description": "React tsx component just return"
+	},
+	"Storybook 6 Template": {
+		"prefix": "storybookTemplate",
+		"body": [
+			"import React, { ComponentProps } from 'react';",
+			"import { Story, Meta } from '@storybook/react';",
+			"",
+			"import $1 from '..';",
+			"",
+			"",
+			"export default {",
+			"  title: '$2/$1',",
+			"  component: $1,",
+			"} as Meta;",
+			"",
+			"const Template: Story<ComponentProps<typeof $1>> = args => <$1 {...args} />;",
+			"",
+			"export const Storybook$1 = Template.bind({});",
+			"Storybook$1.storyName = '$1';",
+			"Storybook$1.args = {$3};",
+			"",
+		],
+		"description": "Storybook 6 Template"
+	},
+	"import styles": {
+		"prefix": "importStyles",
+		"body": [
+			"import styles from './styles.scss';",
+		],
+		"description": "import styles",
+	},
+	"istanbul ignore": {
+		"prefix": "istanbulIgnore",
+		"body": "/* istanbul ignore file */",
+		"description": "istanbul ignore"
+	},
+
+	// ----- test utils ------
+	"beforeEach clearAllMocks": {
+		"prefix": "beclear",
+		"body": [
+			"beforeEach(() => {",
+			"  jest.clearAllMocks();",
+			"});",
+		],
+		"description": "jest beforeEach jest.clearAllMocks()",
+	},
+	"mock function": {
+		"prefix": "mockFunction",
+		"body": "const mock${1/^(.)(.*)$/${1:/upcase}${2}/} = jest.fn();",
+		"description": "mock function",
+	},
+	"mock function external": {
+		"prefix": "mockFunctionExternal",
+		"body": [
+			"import { $2 } from '$1';",
+			"jest.mock('$1', () => ({ $2: jest.fn() }));",
+		],
+		"description": "jest mock external function"
+	},
+	"mock component":{
+		"prefix": "mockCompoent",
+		"body": "jest.mock('$2/$1', () => ({ $1: '$1' }));",
+		"description": "jest mock component"
+	},
+	"mock global store": {
+		"prefix": "mockGlobalStore",
+		"body": [
+			"const mockGlobalStore = {",
+			"  $1",
+			"};",
+			"",
+			"jest.mock('hooks/useGlobalStores', () => ({ useGlobalStores: () => mockGlobalStore }));"
+		],
+		"description": "jest mock global store",
+	},
+	"mock local store": {
+		"prefix": "mockLocalStore",
+		"body": [
+			"const mock${1/^(.)(.*)$/${1:/upcase}${2}/} = {",
+			"  ${1/^(.)(.*)$/${1:/downcase}${2}/}: {",
+			"    $0",
+			"  },",
+			"};",
+			"",
+			"jest.mock('hooks/useLocalStores', () => ({ use${1/^(.)(.*)$/${1:/upcase}${2}/}: () => mock${1/^(.)(.*)$/${1:/upcase}${2}/} }));"
+		],
+		"description": "jest mock local store",
+	},
+	"mock useEffect": {
+		"prefix": "mockUseEffect",
+		"body": [
+			"React.useEffect = jest.fn();",
+			"const mockUseEffect = (React.useEffect as jest.MockedFunction<typeof React.useEffect>);",
+		],
+		"description": "jest mock useEffect",
+	},
+	"mock useState": {
+		"prefix": "mockUseState",
+		"body": [
+			"const mockSet$2 = jest.fn();",
+			"const mockUseStateValues: [unknown, () => void] = [$1, mockSet$2];",
+			"(React.useState as unknown) = jest.fn(() => mockUseStateValues);",
+		],
+		"description": "jest mock useState",
+	},
+	"mock 2 useStates": {
+		"prefix": "mock2UseStates",
+		"body": [
+			"const mockSet$4 = jest.fn();",
+			"const mockUseStateValuesFirst: [unknown, () => void] = [$3, mockSet$4];",
+			"const mockSet$2 = jest.fn();",
+			"const mockUseStateValuesSecond: [unknown, () => void] = [$1, mockSet$2];",
+			"(React.useState as unknown) = jest.fn() // in beforeEach$5",
+      "  .mockImplementationOnce(() => mockUseStateValuesFirst)",
+      "  .mockImplementationOnce(() => mockUseStateValuesSecond);",
+		],
+		"description": "jest mock two useStates",
+	},
+	"mock useParams": {
+		"prefix": "mockUseParams",
+		"body": [
+			"jest.mock('react-router-dom', () => ({ useParams: jest.fn(() => ({ $1 })) }));",
+		],
+		"description": "jest mock useParams",
+	},
+	"mock useMemo": {
+		"prefix": "mockUseMemo",
+		"body": [
+			"React.useMemo = jest.fn();",
+			"const mockUseMemo = (React.useMemo as jest.Mock<typeof React.useMemo>);",
+		],
+		"description": "jest mock useMemo",
+	},
+
+	// ------ expects ------
+	"expect to be": {
+		"prefix": "expect.toBe",
+		"body": "expect($1).toBe($2);"
+	},
+	"expect to equal": {
+		"prefix": "expect.toEqual",
+		"body": "expect($1).toEqual($2);"
+	},
+	"expect to be called": {
+		"prefix": "expect.toBeCalled",
+		"body": "expect($1).toBeCalled();"
+	},
+	"expect to be called times": {
+		"prefix": "expect.toBeCalledTimes",
+		"body": "expect($1).toBeCalledTimes(${2:1});"
+	},
+	"expect not to be called": {
+		"prefix": "expect.not.toBeCalled",
+		"body": "expect($1).not.toBeCalled();"
+	},
+	"expect to be called with": {
+		"prefix": "expect.toBeCalledWith",
+		"body": "expect($1).toBeCalledWith($2);"
+	},
+	
+	// ------ snapshots ------
+	"Snapshot template file": {
+		"prefix": "snapTemplate",
+		"body": [
+			"import React from 'react'",
+			"import { $1 } from '.'",
+			"",
+			"",
+			"describe('$1', () => {",
+			"  test('should render correctly', () => {",
+			"    testMatchSnapshot(<$1 $2></$1>);",
+			"  });",
+			"});",
+			"",
+		],
+		"description": "jest snapshot template file",
+	},
+	"Snapshot just": {
+		"prefix": "snap",
+		"body": [
+			"test('$3', () => {",
+			"  testMatchSnapshot(<$1 $2></$1>);",
+			"});",
+		],
+		"description": "jest just snapshot"
+	},
+	"Snapshot branching": {
+		"prefix": "snapBranching",
+		"body": [
+			"describe('$3', () => {",
+			"  test('$4', () => {",
+			"    testMatchSnapshot(<$1 $2></$1>);",
+			"  });",
+			"  test('$4', () => {",
+			"    testMatchSnapshot(<$1 $2></$1>);",
+			"  });",
+			"});",
+		],
+		"description": "jest snapshot branching",
+	},
+
+	// ------ call functions ------
+	"call function by event component": {
+		"prefix": "callByComponent",
+		"body": [
+			"test('$2 should call $3 function', () => {",
+			"  testCallEventFromComponent(",
+			"    create(<$1 />),",
+      "    $2,",
+      "    '$3',",
+			"  );",
+			"});",
+		],
+		"description": "jest component event should call function",
+	},
+	"call function by event component with arguments": {
+		"prefix": "callByComponentWithArguments",
+		"body": [
+			"test('$2 should call $3 function', () => {",
+			"  testCallEventWithArguments(",
+			"    create(<$1 />),",
+      "    $2,",
+      "    [$4],",
+      "    '$3',",
+			"  );",
+			"});",
+		],
+		"description": "jest component event should call function with arguments",
+	},
+	"call function by useEffect": {
+		"prefix": "callFunctionByUseEffect",
+		"body": [
+			"expect($1).not.toBeCalled();",
+			"mockUseEffect.mock.calls[$2][0]();",
+			"expect($1).toBeCalledTimes(1);",
+		],
+		"description": "jest useEffect should call function",
+	},
+	"call mock useEffect": {
+		"prefix": "callUseEffect",
+		"body": "mockUseEffect.mock.calls[$1][0]();",
+		"description": "jest call useEffect",
+	},
+	"call mock useMemo": {
+		"prefix": "callUseMemo",
+		"body": "mockUseMemo.mock.calls[$1][0]();",
+		"description": "jest call useMemo",
+	},
+}
